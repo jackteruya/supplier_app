@@ -6,12 +6,18 @@ class Suppliers(models.Model):
     corporate_reason = models.CharField('Razao Social', max_length=128)
     cnpj = models.CharField('CNPJ', max_length=128)
 
+    def __str__(self):
+        return f'{self.id} - {self.fantasy_name}'
+
 
 class TelephoneSuppliers(models.Model):
     ddd = models.CharField(max_length=3)
     number = models.CharField(max_length=10)
     is_main = models.BooleanField(default=True)
     supplier = models.ForeignKey(Suppliers, related_name='telephone', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.id} - ({self.ddd}) {self.number}'
 
 
 class AddressSuppliers(models.Model):
@@ -24,3 +30,6 @@ class AddressSuppliers(models.Model):
     state = models.CharField(max_length=64)
     is_main = models.BooleanField(default=True)
     supplier = models.ForeignKey(Suppliers, related_name='address', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.id} - {self.street_address}'

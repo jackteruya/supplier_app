@@ -5,6 +5,7 @@ import { Button, Table } from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination';
 
 import { loadCategories } from '../../api/category/getCategory';
+import { deleteCategoryByID } from '../../api/category/deleteCategoryBy'
 
 import Header from '../../components/Header/header';
 
@@ -42,11 +43,18 @@ function Categories() {
 
   const prevPage = () => {
     handleLoadCategories(limit, previous);
-}
+  }
 
-const nextPage = () => {
-  handleLoadCategories(limit, next);
-}
+  const nextPage = () => {
+    handleLoadCategories(limit, next);
+  }
+
+  const deleteCaegory = (id) => {
+    deleteCategoryByID(id)
+    handleLoadCategories(limit, offset)
+  }
+
+
 
   return (
     <>
@@ -72,7 +80,7 @@ const nextPage = () => {
             <th>{category.name}</th>
             <th>
               <Button style={{margin: "1px"}}>Editar</Button>
-              <Button style={{margin: "1px"}}>Excluir</Button>
+              <Button style={{margin: "1px"}} onClick={() => deleteCaegory(category.id)}>Excluir</Button>
             </th>
             </tr>
           )

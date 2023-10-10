@@ -13,12 +13,19 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 
 class ProductsSerializer(serializers.ModelSerializer):
-    category = CategoriesSerializer()
 
     class Meta:
         model = Products
         fields = ['id', 'name', 'description', 'category']
         read_only_fields = ['id', ]
+
+
+class ProductsGETSerializer(serializers.ModelSerializer):
+    category = CategoriesSerializer()
+
+    class Meta:
+        model = Products
+        fields = ['id', 'name', 'description', 'category']
 
 
 class ProductsSuppliersSerializer(serializers.ModelSerializer):

@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from products.models import Categories, Products, ProductsSuppliers
+
+
+@admin.register(Categories)
+class CategoriesAdmin(admin.ModelAdmin):
+    fields = ['id', 'name']

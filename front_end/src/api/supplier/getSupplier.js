@@ -1,9 +1,9 @@
-import request from "./request";
+import request from "../request";
 
-export const loadCategories = async () => {
+export const loadSuppliers = async () => {
     const objConfig = {
         method: 'GET',
-        url: 'http://127.0.0.1:8000/categories/'
+        url: 'http://127.0.0.1:8000/suppliers/'
     };
     try{
         const response = await request(objConfig);

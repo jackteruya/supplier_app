@@ -4,7 +4,7 @@ import { Button, Table } from 'react-bootstrap';
 
 import Header from "../../components/Header/header";
 
-import { loadSuppliers } from "../../api/getSupplier";
+import { loadSuppliers } from "../../api/supplier/getSupplier";
 
 
 function Supplier() {
@@ -47,8 +47,8 @@ function Supplier() {
             <th>{supplier.address[0].street_address}, {supplier.address[0].number}, {supplier.address[0].city} - {supplier.address[0].state}</th>
             <th>{supplier.telephone[0].ddd} {supplier.telephone[0].number}</th>
             <th>
-                <Button>Editar</Button>
-                <Button>Excluir</Button>
+                <Button style={{margin: "1px"}}>Editar</Button>
+                <Button style={{margin: "1px"}}>Excluir</Button>
             </th>
             </tr>
             )

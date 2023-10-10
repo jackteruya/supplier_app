@@ -1,14 +1,14 @@
-import request from "./request";
+import request from "../request";
 
-export const sendCategory = async (data) => {
+export const sendProduct = async (data) => {
     const objConfig = {
         method: 'POST',
-        url: 'http://127.0.0.1:8000/categories/',
+        url: 'http://127.0.0.1:8000/products/',
         data: JSON.stringify(data)
     };
     try{
         const response = await request(objConfig);
-        return JSON.parse(response)
+        return response
     } catch(e) {
         console.log(e)
         return e

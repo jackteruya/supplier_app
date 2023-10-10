@@ -10,4 +10,5 @@ router.register(r'products/supplier', ProductsSuppliersViewSets, 'products-suppl
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]

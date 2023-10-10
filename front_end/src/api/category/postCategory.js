@@ -8,7 +8,7 @@ export const sendCategory = async (data) => {
     };
     try{
         const response = await request(objConfig);
-        return JSON.parse(response)
+        return response
     } catch(e) {
         console.log(e)
         return e

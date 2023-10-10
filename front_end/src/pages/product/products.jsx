@@ -21,9 +21,10 @@ function Product() {
 
     const handleLoadProducts = useCallback(async(limit, offset) => {
         const response = await loadProducts(limit, offset);
-        console.log(response)
+
         if(response.status == 200){
             setProductList(response.data.results)
+
             if(response.data.next){
                 setOffset(offset+limit)
                 setNext(offset+limit)
@@ -33,7 +34,6 @@ function Product() {
                 setOffset(offset-limit)
                 setPrevious(offset-limit)
             }
-            
         }
     }, []);
   

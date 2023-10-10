@@ -1,24 +1,52 @@
 import React from 'react';
-
 import { useCallback, useEffect, useState } from 'react';
+import { Button, Table } from 'react-bootstrap';
+
+import Pagination from 'react-bootstrap/Pagination';
+
 import { loadCategories } from '../../api/category/getCategory';
 
 import Header from '../../components/Header/header';
-import { Button, Table } from 'react-bootstrap';
 
 
 function Categories() {
+
   const [categoriesList, setcategoriesList] = useState([])
 
-  const handleLoadCategories = useCallback(async() => {
-    const response = await loadCategories();
-    console.log('dddd', response.results)
-    setcategoriesList(response.results)
+  const [limit, setLimit] = useState(5);
+  const [offset, setOffset] = useState(0);
+
+  const [next, setNext] = useState(0);
+  const [previous, setPrevious] = useState(0);
+
+  const handleLoadCategories = useCallback(async(limit, offset) => {
+    const response = await loadCategories(limit, offset);
+
+    if(response.status == 200){
+      setcategoriesList(response.data.results)
+
+      if(response.data.next){
+          setOffset(offset+limit)
+          setNext(offset+limit)
+      }
+      if(response.data.previous){
+          setOffset(offset-limit)
+          setPrevious(offset-limit)
+      }
+    }
   }, [])
 
   useEffect(() =>{
-    handleLoadCategories();
+    handleLoadCategories(limit, offset);
   }, [handleLoadCategories])
+
+  const prevPage = () => {
+    handleLoadCategories(limit, previous);
+}
+
+const nextPage = () => {
+  handleLoadCategories(limit, next);
+}
 
   return (
     <>
@@ -53,6 +81,12 @@ function Categories() {
         </tbody>
               
       </Table>
+    </div>
+    <div>
+      <Pagination>
+            <Pagination.Prev onClick={prevPage}/>
+            <Pagination.Next onClick={nextPage} />
+        </Pagination>
     </div>
     </>
   )

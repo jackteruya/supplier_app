@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Header from "../../components/Header/header";
 import { sendCategory } from "../../api/category/postCategory";
 import { Button } from 'react-bootstrap';
-// import * as formik from 'formik';
+import { useNavigate } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -12,9 +12,14 @@ import Col from 'react-bootstrap/Col';
 
 function CategoryForm() {
     const { register, handleSubmit, formState: { erros } } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = data => {
-        sendCategory(data)
+        sendCategory(data).then((response) => {
+            if([200, 201, 202].includes(response.status)){
+                navigate('/category')
+            }
+        })
 
     }
 
